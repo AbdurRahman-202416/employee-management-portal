@@ -92,7 +92,7 @@ export function buildSeed(): SeedData {
 
   // Fixed demo accounts (shown on the login screen).
   const demoSeeds: { id: string; first: string; last: string; email: string; roleId: string; dep: string; desig: string }[] = [
-    { id: "emp-super", first: "Jasim", last: "Uddin", email: "super@gmail.com", roleId: "role-superadmin", dep: "dep-it", desig: "Engineering Lead" },
+    { id: "emp-super", first: "George", last: "Washington", email: "super@gmail.com", roleId: "role-superadmin", dep: "dep-it", desig: "Engineering Lead" },
     { id: "emp-admin", first: "Nadia", last: "Rahman", email: "admin@gmail.com", roleId: "role-admin", dep: "dep-hr", desig: "HR Manager" },
     { id: "emp-employee", first: "Rakib", last: "Hasan", email: "employee@gmail.com", roleId: "role-employee", dep: "dep-it", desig: "Software Engineer" },
   ];
