@@ -6,6 +6,7 @@ import { DataTable, type ColumnDef } from "@/components/common/data-table";
 import { StatusBadge } from "@/components/common/status-badge";
 import { EmployeeLink } from "@/components/common/employee-link";
 import { Select } from "@/components/ui/input";
+import { TASK_STATUS } from "@/config/status.config";
 import { formatDate } from "@/lib/date";
 import type { TaskStatus } from "@/types";
 
@@ -58,7 +59,7 @@ function StatusCell({ row }: { row: TaskRow }) {
     >
       {options.map((o) => (
         <option key={o} value={o}>
-          {o.replace("-", " ")}
+          {TASK_STATUS[o]?.label ?? o}
         </option>
       ))}
     </Select>
