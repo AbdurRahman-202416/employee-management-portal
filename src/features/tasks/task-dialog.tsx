@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input, Textarea, Select, Field } from "@/components/ui/input";
+import { Combobox } from "@/components/ui/combobox";
 
 export function TaskDialog({ employees }: { employees: { id: string; name: string }[] }) {
   const router = useRouter();
@@ -67,9 +68,12 @@ export function TaskDialog({ employees }: { employees: { id: string; name: strin
           <Field label="Description"><Textarea value={form.description} onChange={(e) => set("description", e.target.value)} required /></Field>
           <div className="grid gap-4 sm:grid-cols-3">
             <Field label="Assignee">
-              <Select value={form.assigneeId} onChange={(e) => set("assigneeId", e.target.value)} required>
-                {employees.map((emp) => <option key={emp.id} value={emp.id}>{emp.name}</option>)}
-              </Select>
+              <Combobox
+                value={form.assigneeId}
+                onChange={(v) => set("assigneeId", v)}
+                options={employees.map((emp) => ({ value: emp.id, label: emp.name }))}
+                placeholder="Select assignee"
+              />
             </Field>
             <Field label="Priority">
               <Select value={form.priority} onChange={(e) => set("priority", e.target.value)}>
