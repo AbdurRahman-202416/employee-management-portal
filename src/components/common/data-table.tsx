@@ -21,6 +21,8 @@ export interface ColumnDef<T> {
   align?: "left" | "right" | "center";
   sortable?: boolean;
   className?: string;
+  /** Hide this column on small screens (shown from the `md` breakpoint up). */
+  hideOnMobile?: boolean;
 }
 
 interface DataTableProps<T> {
@@ -132,7 +134,8 @@ export function DataTable<T extends { id: string }>({
                     className={cn(
                       "px-4 py-3 font-medium",
                       col.align === "right" && "text-right",
-                      col.align === "center" && "text-center"
+                      col.align === "center" && "text-center",
+                      col.hideOnMobile && "hidden md:table-cell"
                     )}
                   >
                     {col.sortable ? (
@@ -182,6 +185,7 @@ export function DataTable<T extends { id: string }>({
                           "px-4 py-3 text-foreground",
                           col.align === "right" && "text-right tabular",
                           col.align === "center" && "text-center",
+                          col.hideOnMobile && "hidden md:table-cell",
                           col.className
                         )}
                       >

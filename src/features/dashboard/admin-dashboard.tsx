@@ -10,7 +10,7 @@ export function AdminDashboard({ stats }: { stats: AdminStats }) {
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         <StatCard label="Total Employees" value={stats.totalEmployees} icon={Users} tone="primary" href="/employees" />
         <StatCard label="Present Today" value={stats.presentToday} icon={UserCheck} tone="success" href="/attendance" />
         <StatCard label="Absent Today" value={stats.absentToday} icon={UserX} tone="danger" href="/attendance" />

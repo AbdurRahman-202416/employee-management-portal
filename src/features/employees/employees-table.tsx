@@ -24,9 +24,9 @@ const columns: ColumnDef<EmployeeRow>[] = [
       </div>
     ),
   },
-  { key: "email", header: "Email", sortable: true },
+  { key: "email", header: "Email", sortable: true, hideOnMobile: true },
   { key: "departmentName", header: "Department", sortable: true },
-  { key: "designation", header: "Designation", sortable: true },
+  { key: "designation", header: "Designation", sortable: true, hideOnMobile: true },
   {
     key: "employmentStatus",
     header: "Status",

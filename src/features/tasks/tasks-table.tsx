@@ -73,10 +73,11 @@ const columns: ColumnDef<TaskRow>[] = [
     key: "assigneeName",
     header: "Assignee",
     sortable: true,
+    hideOnMobile: true,
     render: (r) => <EmployeeLink id={r.assigneeId} name={r.assigneeName} canView={r.canViewEmployee} />,
   },
   { key: "priority", header: "Priority", align: "center", render: (r) => <StatusBadge kind="priority" value={r.priority} /> },
-  { key: "dueDate", header: "Due", render: (r) => formatDate(r.dueDate) },
+  { key: "dueDate", header: "Due", hideOnMobile: true, render: (r) => formatDate(r.dueDate) },
   { key: "status", header: "Status", render: (r) => <StatusCell row={r} /> },
 ];
 

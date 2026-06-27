@@ -39,10 +39,10 @@ export function LateEntryTable({
           } as ColumnDef<LateEntryRow>,
         ]
       : []),
-    { key: "checkInAt", header: "Check In", align: "right", render: (r) => formatTime(r.checkInAt) },
-    { key: "checkOutAt", header: "Check Out", align: "right", render: (r) => formatTime(r.checkOutAt) },
-    { key: "workedMinutes", header: "Worked", align: "right", render: (r) => (r.workedMinutes ? formatDuration(r.workedMinutes) : "—") },
-    { key: "reason", header: "Reason", render: (r) => <span className="text-muted-foreground">{r.reason}</span> },
+    { key: "checkInAt", header: "Check In", align: "right", hideOnMobile: true, render: (r) => formatTime(r.checkInAt) },
+    { key: "checkOutAt", header: "Check Out", align: "right", hideOnMobile: true, render: (r) => formatTime(r.checkOutAt) },
+    { key: "workedMinutes", header: "Worked", align: "right", hideOnMobile: true, render: (r) => (r.workedMinutes ? formatDuration(r.workedMinutes) : "—") },
+    { key: "reason", header: "Reason", hideOnMobile: true, render: (r) => <span className="text-muted-foreground">{r.reason}</span> },
     { key: "status", header: "Status", render: (r) => <StatusBadge kind="application" value={r.status} /> },
     ...(canApprove
       ? [

@@ -26,8 +26,8 @@ const columns: ColumnDef<AttendanceRow>[] = [
   },
   { key: "date", header: "Date", sortable: true, render: (r) => formatDate(r.date) },
   { key: "checkInAt", header: "Check In", render: (r) => formatTime(r.checkInAt) },
-  { key: "checkOutAt", header: "Check Out", render: (r) => formatTime(r.checkOutAt) },
-  { key: "workedMinutes", header: "Worked", align: "right", render: (r) => formatDuration(r.workedMinutes) },
+  { key: "checkOutAt", header: "Check Out", hideOnMobile: true, render: (r) => formatTime(r.checkOutAt) },
+  { key: "workedMinutes", header: "Worked", align: "right", hideOnMobile: true, render: (r) => formatDuration(r.workedMinutes) },
   { key: "status", header: "Status", align: "center", render: (r) => <StatusBadge kind="attendance" value={r.status} /> },
 ];
 

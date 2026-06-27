@@ -40,10 +40,10 @@ export function LeaveTable({
           } as ColumnDef<LeaveRow>,
         ]
       : []),
-    { key: "fromDate", header: "From", render: (r) => formatDate(r.fromDate) },
-    { key: "toDate", header: "To", render: (r) => formatDate(r.toDate) },
-    { key: "days", header: "Days", align: "right" },
-    { key: "reason", header: "Reason", render: (r) => <span className="text-muted-foreground">{r.reason}</span> },
+    { key: "fromDate", header: "From", hideOnMobile: true, render: (r) => formatDate(r.fromDate) },
+    { key: "toDate", header: "To", hideOnMobile: true, render: (r) => formatDate(r.toDate) },
+    { key: "days", header: "Days", align: "right", hideOnMobile: true },
+    { key: "reason", header: "Reason", hideOnMobile: true, render: (r) => <span className="text-muted-foreground">{r.reason}</span> },
     { key: "status", header: "Status", render: (r) => <StatusBadge kind="application" value={r.status} /> },
     ...(canApprove
       ? [
