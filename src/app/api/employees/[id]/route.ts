@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { authorize } from "@/server/auth/guard";
-import { getEmployee, updateEmployee } from "@/server/repositories/employees";
+import { getEmployee, updateEmployee, softDeleteEmployee } from "@/server/repositories/employees";
 import { addAuditLog } from "@/server/repositories/misc";
 import { fullName } from "@/lib/format";
 
@@ -41,4 +41,29 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   });
 
   return Response.json({ success: true, data: { id: updated?.id } });
+}
+
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const auth = await authorize("employee.delete");
+  if ("error" in auth) return auth.error;
+
+  const { id } = await params;
+  if (id === auth.user.id) {
+    return Response.json({ success: false, error: "You cannot delete your own account" }, { status: 400 });
+  }
+  const emp = getEmployee(id);
+  if (!emp) return Response.json({ success: false, error: "Employee not found" }, { status: 404 });
+
+  softDeleteEmployee(id);
+  addAuditLog({
+    id: `log-${Date.now()}`,
+    actorId: auth.user.id,
+    action: "employee.delete",
+    entity: "Employee",
+    entityId: id,
+    summary: `${auth.user.name} removed ${fullName(emp.firstName, emp.lastName)} (${emp.employeeId})`,
+    createdAt: new Date().toISOString(),
+  });
+
+  return Response.json({ success: true });
 }

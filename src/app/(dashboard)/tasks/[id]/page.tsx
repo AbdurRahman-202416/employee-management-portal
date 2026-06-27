@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 import { StatusBadge } from "@/components/common/status-badge";
 import { ReviewActions } from "@/features/applications/review-actions";
+import { DeleteButton } from "@/components/common/delete-button";
 
 export default async function TaskDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -26,9 +27,19 @@ export default async function TaskDetailsPage({ params }: { params: Promise<{ id
 
   return (
     <div className="space-y-6">
-      <Link href="/tasks" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
-        <ArrowLeft className="h-4 w-4" /> Back to tasks
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link href="/tasks" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" /> Back to tasks
+        </Link>
+        {can(user, "task.delete") && (
+          <DeleteButton
+            endpoint={`/api/tasks/${task.id}`}
+            title="Delete task?"
+            subtitle={`${task.code} — ${task.title} will be permanently removed.`}
+            redirectTo="/tasks"
+          />
+        )}
+      </div>
 
       <Card>
         <CardHeader className="gap-3">

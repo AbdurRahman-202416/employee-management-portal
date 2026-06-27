@@ -24,7 +24,6 @@ export const PERMISSION_GROUPS: {
       { key: "employee.view", label: "View employees" },
       { key: "employee.create", label: "Add employees" },
       { key: "employee.edit", label: "Edit employees" },
-      { key: "employee.delete", label: "Remove employees" },
     ],
   },
   {
@@ -78,6 +77,17 @@ export const PERMISSION_GROUPS: {
       { key: "auditlog.view", label: "View audit logs" },
     ],
   },
+  {
+    group: "Danger Zone",
+    items: [
+      { key: "employee.delete", label: "Delete employees" },
+      { key: "department.delete", label: "Delete departments" },
+      { key: "role.delete", label: "Delete roles" },
+      { key: "task.delete", label: "Delete tasks" },
+      { key: "leave.delete", label: "Delete leave applications" },
+      { key: "lateentry.delete", label: "Delete late entries" },
+    ],
+  },
 ];
 
 export const ALL_PERMISSIONS: Permission[] = PERMISSION_GROUPS.flatMap((g) =>
@@ -100,7 +110,6 @@ const ADMIN_PERMISSIONS: Permission[] = [
   "employee.view",
   "employee.create",
   "employee.edit",
-  "employee.delete",
   "department.view",
   "department.manage",
   "attendance.view.all",

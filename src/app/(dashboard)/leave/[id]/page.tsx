@@ -9,6 +9,7 @@ import { fullName } from "@/lib/format";
 import { formatDate } from "@/lib/date";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/common/status-badge";
+import { DeleteButton } from "@/components/common/delete-button";
 
 export default async function LeaveDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -24,9 +25,19 @@ export default async function LeaveDetailsPage({ params }: { params: Promise<{ i
 
   return (
     <div className="space-y-6">
-      <Link href="/leave" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
-        <ArrowLeft className="h-4 w-4" /> Back to leave
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link href="/leave" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" /> Back to leave
+        </Link>
+        {can(user, "leave.delete") && (
+          <DeleteButton
+            endpoint={`/api/leave/${leave.id}`}
+            title="Delete leave application?"
+            subtitle="This leave request will be permanently removed."
+            redirectTo="/leave"
+          />
+        )}
+      </div>
 
       <Card>
         <CardHeader className="gap-2">

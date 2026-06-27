@@ -9,6 +9,7 @@ import { fullName } from "@/lib/format";
 import { formatDate } from "@/lib/date";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/common/status-badge";
+import { DeleteButton } from "@/components/common/delete-button";
 
 export default async function LateEntryDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -24,9 +25,19 @@ export default async function LateEntryDetailsPage({ params }: { params: Promise
 
   return (
     <div className="space-y-6">
-      <Link href="/late-entry" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
-        <ArrowLeft className="h-4 w-4" /> Back to late entry
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link href="/late-entry" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" /> Back to late entry
+        </Link>
+        {can(user, "lateentry.delete") && (
+          <DeleteButton
+            endpoint={`/api/late-entry/${entry.id}`}
+            title="Delete late entry?"
+            subtitle="This late-entry application will be permanently removed."
+            redirectTo="/late-entry"
+          />
+        )}
+      </div>
 
       <Card>
         <CardHeader className="gap-2">

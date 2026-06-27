@@ -35,7 +35,13 @@ export type Permission =
   | "notification.view"
   | "role.manage"
   | "settings.manage"
-  | "auditlog.view";
+  | "auditlog.view"
+  // Destructive actions — granted to Super Admin only by default.
+  | "department.delete"
+  | "role.delete"
+  | "task.delete"
+  | "leave.delete"
+  | "lateentry.delete";
 
 export interface Role {
   id: string;

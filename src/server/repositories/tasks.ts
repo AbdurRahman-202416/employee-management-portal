@@ -60,6 +60,14 @@ export function taskStats(assigneeId?: string) {
   };
 }
 
+export function deleteTask(id: string): boolean {
+  const store = getStore();
+  const idx = store.tasks.findIndex((t) => t.id === id);
+  if (idx === -1) return false;
+  store.tasks.splice(idx, 1);
+  return true;
+}
+
 export function updateTaskStatus(id: string, status: TaskStatus, note?: string): TaskItem | undefined {
   const t = getStore().tasks.find((x) => x.id === id);
   if (!t) return undefined;

@@ -54,6 +54,22 @@ export function createLateEntry(input: {
   return entry;
 }
 
+export function deleteLeave(id: string): boolean {
+  const store = getStore();
+  const idx = store.leaves.findIndex((l) => l.id === id);
+  if (idx === -1) return false;
+  store.leaves.splice(idx, 1);
+  return true;
+}
+
+export function deleteLateEntry(id: string): boolean {
+  const store = getStore();
+  const idx = store.lateEntries.findIndex((l) => l.id === id);
+  if (idx === -1) return false;
+  store.lateEntries.splice(idx, 1);
+  return true;
+}
+
 export function getLeave(id: string): LeaveApplication | undefined {
   return getStore().leaves.find((l) => l.id === id);
 }

@@ -26,6 +26,14 @@ export function updateDepartment(id: string, patch: Partial<Department>): Depart
   return dept;
 }
 
+export function deleteDepartment(id: string): boolean {
+  const store = getStore();
+  const idx = store.departments.findIndex((d) => d.id === id);
+  if (idx === -1) return false;
+  store.departments.splice(idx, 1);
+  return true;
+}
+
 export function getDepartment(id: string): Department | undefined {
   return getStore().departments.find((d) => d.id === id);
 }
@@ -53,6 +61,16 @@ export function createRole(input: { name: string; description: string; permissio
   };
   getStore().roles.push(role);
   return role;
+}
+
+/** Returns "ok", "not-found", or "system" (system roles cannot be deleted). */
+export function deleteRole(id: string): "ok" | "not-found" | "system" {
+  const store = getStore();
+  const role = store.roles.find((r) => r.id === id);
+  if (!role) return "not-found";
+  if (role.isSystem) return "system";
+  store.roles = store.roles.filter((r) => r.id !== id);
+  return "ok";
 }
 
 export function getSettings(): AppSettings {

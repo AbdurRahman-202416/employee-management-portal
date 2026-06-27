@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import { ShieldCheck } from "lucide-react";
 import { requirePermission } from "@/server/auth/guard";
+import { can } from "@/lib/permissions";
 import { listRoles } from "@/server/repositories/lookups";
 import { ALL_PERMISSIONS } from "@/config/permissions.config";
 import { PageHeader } from "@/components/common/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { RoleDialog } from "@/features/roles/role-dialog";
+import { DeleteButton } from "@/components/common/delete-button";
 
 export const metadata: Metadata = { title: "Roles" };
 
 export default async function RolesPage() {
-  await requirePermission("role.manage");
+  const user = await requirePermission("role.manage");
   const roles = listRoles();
 
   return (
@@ -41,6 +43,14 @@ export default async function RolesPage() {
                       </Badge>
                     </div>
                   </div>
+                  {can(user, "role.delete") && !r.isSystem && (
+                    <DeleteButton
+                      variant="icon"
+                      endpoint={`/api/roles/${r.id}`}
+                      title="Delete role?"
+                      subtitle={`The "${r.name}" role will be removed.`}
+                    />
+                  )}
                 </div>
 
                 <p className="text-sm text-muted-foreground">{r.description}</p>

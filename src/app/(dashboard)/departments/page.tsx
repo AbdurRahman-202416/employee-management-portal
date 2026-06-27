@@ -9,6 +9,7 @@ import { PageHeader } from "@/components/common/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DepartmentDialog } from "@/features/departments/department-dialog";
+import { DeleteButton } from "@/components/common/delete-button";
 
 export const metadata: Metadata = { title: "Departments" };
 
@@ -34,7 +35,17 @@ export default async function DepartmentsPage() {
                 <CardContent className="space-y-3 p-5">
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold text-foreground">{d.name}</h3>
-                    <Badge tone="primary">{d.code}</Badge>
+                    <div className="flex items-center gap-1">
+                      <Badge tone="primary">{d.code}</Badge>
+                      {can(user, "department.delete") && (
+                        <DeleteButton
+                          variant="icon"
+                          endpoint={`/api/departments/${d.id}`}
+                          title="Delete department?"
+                          subtitle={`${d.name} will be removed. Employees must be reassigned first.`}
+                        />
+                      )}
+                    </div>
                   </div>
                   <p className="text-sm text-muted-foreground">{d.description}</p>
                   <div className="flex items-center justify-between">

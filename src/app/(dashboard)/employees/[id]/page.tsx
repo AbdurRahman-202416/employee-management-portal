@@ -22,6 +22,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/common/status-badge";
 import { EmployeeDialog } from "@/features/employees/employee-dialog";
+import { DeleteButton } from "@/components/common/delete-button";
 import type { LeaveBalance } from "@/types";
 
 function AttendanceTile({ label, value, tone }: { label: string; value: number; tone: string }) {
@@ -115,6 +116,15 @@ export default async function EmployeeDetailsPage({
                       joiningDate: emp.joiningDate,
                       employmentStatus: emp.employmentStatus,
                     }}
+                  />
+                )}
+                {can(viewer, "employee.delete") && (
+                  <DeleteButton
+                    variant="icon"
+                    endpoint={`/api/employees/${emp.id}`}
+                    title="Delete employee?"
+                    subtitle={`${name} will be removed from the directory.`}
+                    redirectTo="/employees"
                   />
                 )}
               </div>
