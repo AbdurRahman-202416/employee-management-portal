@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/*
+ * ============================================================
+ *  DESIGN SYSTEM — Employee Management Portal
+ *  Palette: Slate neutrals + Emerald primary + HR-state semantics
+ *  (Present=emerald, Absent=rose, Late=amber, Pending=amber, Info=sky)
+ *  Rule: never hardcode a hex inside a component — use these tokens.
+ * ============================================================
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Surfaces */
+  --background: #f6f7f9;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  /* Muted / subtle */
+  --muted: #eef1f5;
+  --muted-foreground: #64748b;
+
+  /* Brand — Emerald */
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-foreground: #ffffff;
+  --primary-soft: #d1fae5;
+
+  /* Secondary / accent */
+  --secondary: #e2e8f0;
+  --secondary-foreground: #1e293b;
+  --accent: #ecfdf5;
+  --accent-foreground: #065f46;
+
+  /* Lines */
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #059669;
+
+  /* HR-state semantics */
+  --success: #059669;
+  --success-soft: #d1fae5;
+  --danger: #e11d48;
+  --danger-soft: #ffe4e6;
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+  --info: #0284c7;
+  --info-soft: #e0f2fe;
+
+  /* Sidebar (always deep slate) */
+  --sidebar: #0f172a;
+  --sidebar-foreground: #cbd5e1;
+  --sidebar-muted: #64748b;
+  --sidebar-active: #059669;
+  --sidebar-active-foreground: #ffffff;
+  --sidebar-border: #1e293b;
+
+  --radius: 0.65rem;
+}
+
+.dark {
+  --background: #0b1120;
+  --foreground: #e2e8f0;
+  --card: #111a2e;
+  --card-foreground: #e2e8f0;
+  --popover: #111a2e;
+  --popover-foreground: #e2e8f0;
+
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+
+  --primary: #10b981;
+  --primary-hover: #34d399;
+  --primary-foreground: #04231a;
+  --primary-soft: #064e3b;
+
+  --secondary: #1e293b;
+  --secondary-foreground: #e2e8f0;
+  --accent: #0f2e25;
+  --accent-foreground: #6ee7b7;
+
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #10b981;
+
+  --success: #10b981;
+  --success-soft: #064e3b;
+  --danger: #fb7185;
+  --danger-soft: #4c0519;
+  --warning: #fbbf24;
+  --warning-soft: #451a03;
+  --info: #38bdf8;
+  --info-soft: #082f49;
+
+  --sidebar: #070b14;
+  --sidebar-foreground: #94a3b8;
+  --sidebar-muted: #475569;
+  --sidebar-active: #10b981;
+  --sidebar-active-foreground: #04231a;
+  --sidebar-border: #131c2e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-sidebar-active-foreground: var(--sidebar-active-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Numbers in tables/stats align cleanly */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Thin scrollbars */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted-foreground) 35%, transparent);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--muted-foreground) 55%, transparent);
+  background-clip: content-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in { animation: fade-in-up 0.35s ease both; }
