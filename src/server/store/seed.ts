@@ -92,9 +92,9 @@ export function buildSeed(): SeedData {
 
   // Fixed demo accounts (shown on the login screen).
   const demoSeeds: { id: string; first: string; last: string; email: string; roleId: string; dep: string; desig: string }[] = [
-    { id: "emp-super", first: "Jasim", last: "Uddin", email: "super@kona.dev", roleId: "role-superadmin", dep: "dep-it", desig: "Engineering Lead" },
-    { id: "emp-admin", first: "Nadia", last: "Rahman", email: "admin@kona.dev", roleId: "role-admin", dep: "dep-hr", desig: "HR Manager" },
-    { id: "emp-employee", first: "Rakib", last: "Hasan", email: "employee@kona.dev", roleId: "role-employee", dep: "dep-it", desig: "Software Engineer" },
+    { id: "emp-super", first: "Jasim", last: "Uddin", email: "super@gmail.com", roleId: "role-superadmin", dep: "dep-it", desig: "Engineering Lead" },
+    { id: "emp-admin", first: "Nadia", last: "Rahman", email: "admin@gmail.com", roleId: "role-admin", dep: "dep-hr", desig: "HR Manager" },
+    { id: "emp-employee", first: "Rakib", last: "Hasan", email: "employee@gmail.com", roleId: "role-employee", dep: "dep-it", desig: "Software Engineer" },
   ];
 
   let counter = 1;
@@ -113,6 +113,7 @@ export function buildSeed(): SeedData {
       roleId: d.roleId,
       joiningDate: dateKey(between(200, 800)),
       employmentStatus: "active",
+      photoUrl: `https://i.pravatar.cc/150?u=${d.id}`,
       passwordHash,
       mustChangePassword: false,
       leave: {
@@ -133,13 +134,14 @@ export function buildSeed(): SeedData {
       employeeId: makeEmpId(),
       firstName: first,
       lastName: last,
-      email: `${first.toLowerCase()}.${last.toLowerCase()}${i}@kona.dev`,
+      email: `${first.toLowerCase()}.${last.toLowerCase()}${i}@gmail.com`,
       phone: `+8801${between(300000000, 999999999)}`,
       departmentId: pick(departments).id,
       designation: pick(DESIGNATIONS),
       roleId: "role-employee",
       joiningDate: dateKey(between(30, 900)),
       employmentStatus: rand() > 0.1 ? "active" : "on-leave",
+      photoUrl: `https://i.pravatar.cc/150?u=emp-${i + 1}`,
       passwordHash,
       mustChangePassword: false,
       leave: {

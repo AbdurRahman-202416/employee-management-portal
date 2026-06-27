@@ -34,8 +34,9 @@ export async function POST(request: Request) {
   }
 
   const settings = getSettings();
+  const id = `emp-${Date.now()}`;
   const employee: Employee = {
-    id: `emp-${Date.now()}`,
+    id,
     employeeId: nextEmployeeId(),
     firstName: parsed.data.firstName,
     lastName: parsed.data.lastName,
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
     roleId: parsed.data.roleId,
     joiningDate: parsed.data.joiningDate,
     employmentStatus: "active",
+    photoUrl: `https://i.pravatar.cc/150?u=${id}`,
     passwordHash: bcrypt.hashSync(parsed.data.tempPassword, 10),
     mustChangePassword: true,
     leave: {

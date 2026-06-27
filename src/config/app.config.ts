@@ -9,7 +9,7 @@ import type { AppSettings } from "@/types";
 export const APP_CONFIG = {
   name: "Workspace",
   fullName: "Employee Management Portal",
-  company: "Kona",
+  company: "Acme",
   description: "Attendance, tasks, leave, and people — in one place.",
   /** When true, the seeded in-memory data store is used (no database needed). */
   useInMemoryData: !process.env.MONGODB_URI,
@@ -30,7 +30,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
 
 /** Shown on the login screen so a client can try the demo instantly. */
 export const DEMO_ACCOUNTS = [
-  { label: "Super Admin", email: "super@kona.dev", password: "demo1234" },
-  { label: "Admin / HR", email: "admin@kona.dev", password: "demo1234" },
-  { label: "Employee", email: "employee@kona.dev", password: "demo1234" },
+  { label: "Super Admin", email: "super@gmail.com", password: "demo1234" },
+  { label: "Admin / HR", email: "admin@gmail.com", password: "demo1234" },
+  { label: "Employee", email: "employee@gmail.com", password: "demo1234" },
 ];
